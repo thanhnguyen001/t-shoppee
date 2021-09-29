@@ -1,5 +1,5 @@
 import React from 'react';
-import './Slogan.scss';
+import './Slogan.css';
 
 function Slogan() {
     return (

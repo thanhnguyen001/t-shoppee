@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import SignForm from '../components/SignForm/SignForm';
 // import * as Yup from 'yup';
-import './SignPage.scss';
+import './SignPage.css';
 
 
 function SignPage({ history, match }) {

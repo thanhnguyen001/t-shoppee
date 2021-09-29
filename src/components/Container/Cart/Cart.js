@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addNumToCart } from '../../../actions/actions';
-import './Cart.scss';
+import './Cart.css';
 import CartItem from './CartItem';
 
 

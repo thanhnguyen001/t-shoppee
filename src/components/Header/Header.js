@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './Header.scss';
+import './Header.css';
 import firebase from 'firebase';
 import { userLogOut } from '../../actions/actions';
 

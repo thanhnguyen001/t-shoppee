@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
-import './Category.scss';
+import './Category.css';
 import axiosClient from '../../../api/callApi';
 
 function Category({ type }) {

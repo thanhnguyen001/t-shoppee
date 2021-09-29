@@ -1,6 +1,6 @@
 import React from 'react';
 import Pagination from '../Pagination/Pagination';
-import './DetailProduct.scss';
+import './DetailProduct.css';
 
 function DetailProduct() {
 

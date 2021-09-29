@@ -7,7 +7,7 @@ import axiosClient from '../../../api/callApi';
 import userApi from '../../../api/usersApi';
 // import productApi from '../../../api/productApi';
 import DetailProduct from './DetailProduct';
-import './Product.scss';
+import './Product.css';
 
 function Product({ match }) {
 
