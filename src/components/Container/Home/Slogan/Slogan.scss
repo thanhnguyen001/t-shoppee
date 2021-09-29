@@ -1,0 +1,175 @@
+$primaryColor: #444342;
+$textColor: hsl(317 100% 54%);
+$backgroundColor: hsl(323 21% 16%);
+
+.slogan {
+    width: 100vw;
+    background-color: $primaryColor;
+    height: 90px;
+    font-family: "Blaster Regular";
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 10px;
+    color: $textColor;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+
+    &-content {
+        min-height: 100%;
+        display: grid;
+        place-items: center;
+        background: $backgroundColor;
+        color: $textColor;
+        padding: 0 10rem;
+        width: 100%;
+    }
+
+    &-text {
+        font-size: 4rem;
+        display: inline-block;
+        cursor: pointer;
+        text-decoration: none;
+        color: $textColor;
+        border: $textColor 0.125em solid;
+        padding: 0.25em 1em;
+        border-radius: 0.25em;
+
+        text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+
+        box-shadow: inset 0 0 0.5em 0 $textColor, 0 0 0.5em 0 $textColor;
+
+        position: relative;
+        height: 80%;
+        line-height: 80%;
+
+        transition: all 0.2s ease-in-out;
+        animation: twinkle 3s linear infinite;
+
+        @keyframes twinkle {
+            100% {
+                color: $backgroundColor;
+                text-shadow: none;
+                background-color: $textColor;
+            }
+        }
+
+        // &::before {
+        //     pointer-events: none;
+        //     content: "";
+        //     position: absolute;
+        //     background: $textColor;
+        //     top: 120%;
+        //     left: 0;
+        //     width: 100%;
+        //     height: 100%;
+
+        //     transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+        //     filter: blur(1em);
+        //     opacity: 0.7;
+        // }
+
+        // &::after {
+        //     content: "";
+        //     position: absolute;
+        //     top: 0;
+        //     bottom: 0;
+        //     left: 0;
+        //     right: 0;
+        //     box-shadow: 0 0 2em 0.5em $textColor;
+        //     opacity: 1;
+        //     background-color: $textColor;
+        //     z-index: -1;
+        //     transition: opacity 100ms linear;
+        //     // animation: twinkle 2s linear infinite;
+
+        //     // @keyframes twinkle {
+        //     //     100%{ opacity: 1;}
+        //     // }
+        // }
+
+        &:hover,
+        &:focus {
+            color: $backgroundColor;
+            text-shadow: none;
+            background-color: $textColor;
+        }
+
+        // &:hover::before,
+        // &:focus::before {
+        //     opacity: 1;
+        // }
+        // &:hover::after,
+        // &:focus::after {
+        //     opacity: 1;
+        // }
+    }
+
+    &-line-left {
+        position: absolute;
+        width: 4px;
+        left: -100%;
+        top: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(0deg, transparent, $textColor);
+        animation: turnRight 2s ease-in-out infinite;
+
+        @keyframes turnRight {
+            100% {
+                left: 100%;
+            }
+        }
+    }
+
+    &-line-right {
+        position: absolute;
+        top: 0;
+        bottom: 100%;
+        width: 6px;
+        right: 0;
+        background: linear-gradient(180deg, transparent, $textColor);
+        animation: downToBottom 2s linear 1s infinite;
+
+        @keyframes downToBottom {
+            100% {
+                bottom: 0;
+            }
+        }
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        height: 8px;
+        bottom: 0;
+        left: 100%;
+        right: 0;
+        background: linear-gradient(270deg, transparent, $textColor);
+        animation: turnLeft 2s linear 3s infinite;
+
+        @keyframes turnLeft {
+            100% {
+                left: -100%;
+            }
+        }
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 6px;
+        bottom: 0;
+        left: 0;
+        top: 100%;
+        background: linear-gradient(360deg, transparent, $textColor);
+        animation: upToTop 2s linear 4s infinite;
+
+        @keyframes upToTop {
+            100% {
+                top: -100%;
+            }
+        }
+    }
+}

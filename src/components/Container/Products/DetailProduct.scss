@@ -1,0 +1,267 @@
+pre {
+    white-space: pre-wrap;
+}
+.product-introduce--wrap {
+    display: flex;
+    margin: 16px -8px 0px;
+}
+
+.product-introduce--description {
+    padding: 0 8px;
+    border: 5px;
+
+    @media (max-width:1024px) {
+        flex: 1 !important;
+        max-width: 100% !important;
+    }
+}
+
+.product-introduce--description-wrap {
+    padding: 25px;
+    background-color: var(--white-color);
+    border-radius: 5px;
+    font-size: 1.5rem;
+    box-shadow: -1px 1px 1px rgb(233, 228, 228), 1px 1px 1px rgb(233, 228, 228), 1px -1px 1px rgb(233, 228, 228),
+    -1px -1px 1px rgb(233, 228, 228);
+}
+
+// .product-introduce--detail {
+
+// }
+
+// .product-introduce--detail-wrap {
+
+// }
+
+.product-introduce--detail-title {
+    padding: 20px;
+    background-color: var(--bg-color);
+    border-radius: 5px;
+    font-size: 2rem;
+}
+
+// .product-introduce--detail-text {
+
+// }
+
+.product-introduce--detail-list {
+    list-style: none;
+}
+
+.product-introduce--detail-item {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.product-introduce--item-title {
+    width: 20%;
+}
+
+.product-introduce--item-text {
+    flex: 1;
+}
+
+// .product-introduce--description-text {
+
+// }
+
+// .product-introduce--description-text-wrap {
+
+// }
+
+.product-introduce--description-title {
+    padding: 20px;
+    background-color: var(--bg-color);
+    border-radius: 5px;
+    font-size: 2rem;
+}
+
+.product-introduce--description-inner {
+    padding: 8px 20px 20px;
+}
+
+
+.product-introduce--ad {
+    padding: 0 8px;
+}
+
+// Assessments --------------------------------------------------------------------------------
+.product-introduce--assessments {
+    @extend .product-introduce--description-wrap;
+    margin-top: 16px;
+}
+
+// .product-introduce--assessments-wrap {
+
+// }
+.product-introduce--assessments-heading {
+    margin-bottom: 16px;
+
+    span {
+        font-size: 2.4rem;
+        letter-spacing: 0.2rem;
+    }
+}
+// .product-introduce--assessments-star {
+
+// }
+.product-introduce--star-wrap {
+    border: 1px solid #d4c5c5;
+    padding: 30px;
+    font-size: 1.8rem;
+    display: flex;
+    background-color: #fffbf8;
+    border-radius: 5px;
+}
+.product-introduce--star-total {
+    width: 20%;
+    font-size: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    transform: translateX(-15px);
+    color: var(--red-color);
+}
+.product-introduce--star-total-line1 {
+
+    span {
+        font-size: 3.2rem;
+    }
+}
+// .product-introduce--star-total-line2 {
+
+// }
+.product-introduce--star-filter {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+
+    div {
+        width: 16.67%;
+        text-align: center;
+        padding: 10px 0px;
+        border: 1px solid #000;
+        margin-right: 12px;
+        margin-bottom: 12px;
+        border-radius: 3px;
+        background-color: var(--white-color);
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.8);
+    }
+}
+.product-introduce--star-all {
+   
+    &.active {
+        border-color: var(--red-color);
+        color: var(--red-color);
+    }
+}
+.product-introduce--star-five {
+    @extend .product-introduce--star-all;
+}
+.product-introduce--star-four {
+    @extend .product-introduce--star-all;
+}
+.product-introduce--star-three {
+    @extend .product-introduce--star-all;
+}
+.product-introduce--star-two {
+    @extend .product-introduce--star-all;
+}
+.product-introduce--star-one {
+    @extend .product-introduce--star-all;
+}
+.product-introduce--star-filter .product-introduce--star-comment {
+    @extend .product-introduce--star-all;
+    width: 25%;
+}
+.product-introduce--star-filter .product-introduce--star-video {
+    @extend .product-introduce--star-all;
+    width: 34%;
+}
+
+
+// User --------------------------------
+
+// .product-introduce--assessments-comment {
+
+// }
+.product-introduce--assessments-comment-wrap {
+    padding: 20px;
+}
+.product-introduce--assessments-user {
+    margin-top: 1rem;
+}
+.product-introduce--assessments-user-wrap {
+    border-bottom: 1px solid rgb(230, 223, 223);
+}
+.product-introduce--assessments-user--info {
+    display: flex;
+}
+.product-introduce--assessments-user--avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+    }
+}
+.product-introduce--assessments-user--rating {
+    margin-left: 0.8rem;
+    font-size: 1.2rem;
+}
+// .product-introduce--assessments-user--name {
+
+// }
+.product-introduce--assessments-user--star {
+    color: var(--red-color);
+}
+.product-introduce--assessments-user-comment {
+    margin-left: 4.8rem;
+    margin-top: 1.1rem;
+}
+.product-introduce--assessments-user-time {
+    margin-top: 1.6rem;
+}
+.product-introduce--assessments-user-reaction {
+    margin-top: 1.6rem;
+    margin-bottom: 1rem;
+
+    & i {
+        display: none;
+        margin-right: 6px;
+    }
+
+    & i.active {
+        display: block;
+    }
+
+    span {
+        margin-left: 4px;
+        display: flex;
+    }
+}
+
+// Product Advertisement
+
+.product-introduce--ad {
+
+    @media (max-width: 1024px) {
+        display: none;
+    }
+}
+
+.product-introduce--ad-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.product-introduce.home-product-item {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+// --------------------------------------------------------------------------------

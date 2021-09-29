@@ -1,0 +1,133 @@
+.shop-sign {
+    width: 100vw;
+    // height: 100vh;
+}
+.shop-sign--heading {
+    height: 82px;
+    background-color: var(--bg-color);
+}
+.shop-sign--heading-wrap {
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 5rem;
+}
+.shop-sign--heading-logo {
+    display: flex;
+    align-items: center;
+}
+.shop-sign--logo {
+    .header-logo {
+        fill: var(--red-color);
+    }
+}
+.shop-sign--sign-up {
+    font-size: 2.5rem;
+    margin-left: 30px;
+
+    &.hide {
+        display: none;
+    }
+    &.show {
+        display: block;
+    }
+}
+.shop-sign--sign-in {
+    @extend .shop-sign--sign-up;
+}
+.shop-sign--help {
+}
+.shop-sign--help-text {
+    color: var(--red-color);
+    font-size: 2rem;
+}
+.shop-sign--body {
+    height: 600px;
+    background-color: #ee4d2d;
+}
+.shop-sign--body-wrap {
+    height: 100%;
+    margin: 0 auto;
+    width: 1040px;
+    background-image: url(https://cf.shopee.vn/file/3eb05faba777c6c5718c3bed9b0b4c43);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.shop-sign--form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
+.shop-sign--form-wrap {
+    width: 400px;
+    min-height: 430px;
+    background-color: var(--bg-color);
+    box-shadow: -1px 1px 1px rgb(233, 228, 228), 1px 1px 1px rgb(233, 228, 228), 1px -1px 1px rgb(233, 228, 228),
+    -1px -1px 1px rgb(233, 228, 228);
+    padding: 30px;
+    border-radius: 5px;
+    transform: scale(0.9);
+}
+.shop-sign--form-heading {
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+.shop-sign--form-part {
+    
+}
+.shop-sign--form-input {
+    padding: 10px;
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    border-color: rgb(204 204 204 / 60%);
+    font-size: 1.8rem;
+    border-style: solid;
+    outline: none;
+
+    &.error {
+        border-color: red;
+        background-color: rgb(238 218 218);
+    }
+}
+.shop-sign--form-error {
+    height: 3.4rem;
+    padding: 10px 0 0 2px;
+    color: var(--red-color);
+}
+.btn {
+    &.shop-sign-in {
+        width: 100%;
+    }
+    &.shop-sign-up {
+        width: 100%;
+    }
+    &.show {display: block;}
+    &.hide{display: none;}
+}
+.shop-sign--form-more-wrap {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.6rem;
+
+    span {
+        opacity: 0.5;
+    }
+
+    div {
+        color: var(--red-color);
+        cursor: pointer;
+    }
+}
+.sho-sign--form-sign-fail {
+    padding: 2px;
+    color: var(--red-color);
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+}
+
+    
