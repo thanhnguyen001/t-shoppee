@@ -36,7 +36,7 @@ const getFireBaseToken = async () => {
 }
 
 const axiosClient = axios.create({
-	baseURL: 'http://localhost:1368',
+	baseURL: 'https://t-shoppee-demo.herokuapp.com/api',
 	timeout: 1000,
 	headers: { 
 		'Content-Type': 'application/json',
