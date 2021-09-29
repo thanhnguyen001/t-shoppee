@@ -1,0 +1,159 @@
+.products-type,
+.product-page,
+.cart-page {
+  position: relative;
+}
+
+.header__search--cart-page {
+  color: var(--white-color);
+  font-size: 2rem;
+  padding: 2px;
+  margin-right: 12px;
+}
+
+.navbar__list--item.hide {
+  display: none;
+}
+
+.navbar__list--item.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.header__cart a {
+  position: relative;
+  z-index: 10;
+}
+
+.header_cart-numbers-carts.hide {
+  display: none;
+}
+
+.header_cart-numbers-carts.show {
+  display: block;
+}
+
+.header__cart-list-items-btn {
+  background-color: rgba(68, 67, 66, 0.5);
+  border-radius: 3px;
+}
+
+.header__cart-item {
+  cursor: text;
+}
+
+.header__cart-list.header__cart-no-cart {
+  top: calc(150%);
+  right: -5.5%;
+}
+
+.header__cart-list.header__cart-has-carts {
+  right: -8.5%;
+  top: 150%;
+}
+
+.header__cart.hide {
+  display: none;
+}
+
+.header__cart-wrap::after {
+  position: absolute;
+  content: "";
+  top: -4px;
+  right: 0;
+  width: 25px;
+  height: 50px;
+  padding: 16px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.header__cart-list {
+  -webkit-transform-origin: top right 8px;
+          transform-origin: top right 8px;
+  -webkit-transition: display 2s, opacity 0.5s linear, -webkit-transform 0.3s linear;
+  transition: display 2s, opacity 0.5s linear, -webkit-transform 0.3s linear;
+  transition: display 2s, opacity 0.5s linear, transform 0.3s linear;
+  transition: display 2s, opacity 0.5s linear, transform 0.3s linear, -webkit-transform 0.3s linear;
+  -webkit-animation: appear 0.2s linear;
+          animation: appear 0.2s linear;
+  display: none;
+}
+
+.header__cart-wrap:hover .header__cart-list {
+  display: block;
+}
+
+@-webkit-keyframes appear {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 0.5;
+  }
+  50% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    opacity: 0.7;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes appear {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 0.5;
+  }
+  50% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    opacity: 0.7;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes appear1 {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    opacity: 0.7;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+  }
+}
+
+@keyframes appear1 {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    opacity: 0.7;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+  }
+}
+/*# sourceMappingURL=Header.css.map */

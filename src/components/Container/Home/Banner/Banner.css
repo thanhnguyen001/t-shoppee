@@ -1,0 +1,138 @@
+.banner {
+  width: 100%;
+  height: 250px;
+  background-color: #fff;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.banner-carousel {
+  width: 70%;
+  height: 100%;
+}
+
+.banner-carousel .carousel-wrap {
+  margin-right: 4px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.banner-carousel .carousel-wrap:hover .carousel-next, .banner-carousel .carousel-wrap:hover .carousel-prev {
+  display: block;
+}
+
+.banner-carousel .carousel-wrap .carousel-next, .banner-carousel .carousel-wrap .carousel-prev {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  right: 0;
+  font-size: 24px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-style: none;
+  height: 65px;
+  width: 36px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  opacity: 0.7;
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
+  cursor: pointer;
+  display: none;
+}
+
+.banner-carousel .carousel-wrap .carousel-prev {
+  left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.banner-carousel .carousel-wrap .label-banner {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 1;
+}
+
+.banner-carousel .carousel-wrap .label-banner .change-slide {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  margin: 0 4px;
+  background: #ccc;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.banner-carousel .carousel-wrap .label-banner .change-slide.active {
+  background-color: red;
+}
+
+.banner-carousel .carousel-slide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 700%;
+  margin: 0;
+  padding: 0;
+}
+
+.banner-carousel .carousel-item {
+  width: 14.29%;
+  height: 100%;
+}
+
+.banner-carousel .carousel-item-link {
+  height: 250px;
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.banner-pattern {
+  width: 30%;
+  height: 100%;
+}
+
+.banner-pattern .pattern-wrap {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.banner-pattern .pattern-item {
+  height: 50%;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.banner-pattern .pattern-item-inner {
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+/*# sourceMappingURL=Banner.css.map */
