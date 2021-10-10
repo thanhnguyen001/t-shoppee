@@ -10,6 +10,7 @@ import firebase from 'firebase/app';
 import { useDispatch } from 'react-redux';
 import { addToCart, userSignIn } from './actions/actions';
 import userApi from './api/usersApi';
+import ShortcutBtn from './components/ShortcutButton/ShortcutBtn';
 
 // Configure Firebase.
 const config = {
@@ -90,9 +91,10 @@ function App() {
 
     return (
         <Fragment>
+
             <Router>
                 <div className="App">
-
+                    <ShortcutBtn />
                     <ScrollToTop>
                         <PathRoutes />
                     </ScrollToTop>

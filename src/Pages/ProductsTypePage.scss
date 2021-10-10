@@ -22,3 +22,23 @@
 .products-type.carousel-item-link {
     height: 350px;
 }
+@media (max-width: 1023px) {
+    .banner.products-type,
+    .products-type.carousel-item-link {
+        height: 250px;
+    }
+    
+}
+@media (max-width: 600px) {
+    .banner.products-type,
+    .products-type.carousel-item-link {
+        height: 200px;
+    }
+}
+@media (max-width: 480px) {
+    .banner.products-type,
+    .products-type.carousel-item-link {
+        height: 150px;
+    }
+}
+

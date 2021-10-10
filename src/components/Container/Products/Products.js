@@ -145,7 +145,7 @@ function Products({ data, type }) {
 
             {/* Mobile Category */}
 
-            <nav className="mobile-category appear-on-tablet">
+            {/* <nav className="mobile-category appear-on-tablet">
                 <ul className="mobile-category-list">
                     <li className="mobile-category-item">
                         <a href="/" className="mobile-category-link">Dụng cụ và thiết bị tiện ích</a>
@@ -163,7 +163,7 @@ function Products({ data, type }) {
                         <a href="/" className="mobile-category-link">Dụng cụ và thiết bị tiện ích</a>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
             {/* Product List */}
             <div className="home-product">
                 <div className="row sm-gutter productList">

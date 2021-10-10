@@ -67,14 +67,14 @@
   padding: 0;
   list-style: none;
   height: 100%;
-  width: 130.5%;
+  /* width: 130.5%; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
 .list-type .types .type-item {
-  width: 10%;
+  /* width: 10%; */
   background-color: #fff;
 }
 
@@ -128,5 +128,13 @@
   height: 3.02rem;
   color: #000;
   margin-top: 18px;
+}
+@media (max-width: 1024px) {
+  .list-type .types .types-detail {
+    overflow-x: auto;
+  }
+  .types-btn-next, .types-btn-prev {
+    display: none;
+  }
 }
 /*# sourceMappingURL=ListType.css.map */

@@ -1,12 +1,13 @@
 /* eslint-disable array-callback-return */
 import React, { useRef, useState, useEffect } from 'react'
 import axiosClient from '../../../api/callApi';
+import useDimensionWindow from '../../../hooks/useDimensionWindow';
 import Category from '../Category/Category';
 
 const Products = React.lazy(() => import('./Products'));
 
 function ProductList({ type }) {
-    let count = 1;
+    let count = useRef(1);
     // console.log(type)
     const carousel = useRef(null);
     const wrapSlide = useRef(null);
@@ -14,6 +15,8 @@ function ProductList({ type }) {
     // const [slider, setSlider] = useState([]);
     // const [dots, setDots] = useState([]);
     const [carousels, setCarousels] = useState([]);
+
+    const { width: windowWidth } = useDimensionWindow();
 
     //Fetch img slide
     useEffect(() => {
@@ -43,89 +46,106 @@ function ProductList({ type }) {
         if (carousel.current) {
             // console.log([wrapSlide.current]);
             if (wrapSlide.current) {
-                setTimeout(() => {
-                    carousel.current.style.transform = `translateX(${-wrapSlide.current.clientWidth}px)`;
-                }, 200)
+                carousel.current.style.transform = `translateX(${-wrapSlide.current.clientWidth * count.current}px)`;
             }
             carousel.current.style.transition = `all 0.7s ease-in-out`;
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [windowWidth])
+
+    const [isFirstChange, setFirst] = useState(true);
+
+    const time = useRef(setTimeout(() => {
+        if (isFirstChange) {
+            setFirst(false);
+            handleOnClick(1);
+        }
+    }, 4000));
+
+    function resetAutoChange() {
+        if (time.current) {
+            clearTimeout(time.current)
+        }
+    }
+    useEffect(() => {
+        resetAutoChange();
+
+        time.current = setTimeout(() => {
+            handleOnClick(0);
+        }, 4000)
+
+        return () => {
+            resetAutoChange();
+            clearTimeout(time.current)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    setInterval(() => handleOnClick(0), 4000);
-    
     const handleOnClick = async (temp) => {
+        resetAutoChange();
+        setFirst(false);
+
         const dotsE = document.querySelectorAll('.change-slide');
         const slider = document.querySelectorAll('.carousel-item');
         // console.log(slider);
         if (carousel.current === null) return;
-        if (temp === 0) {
-            if (count >= slider.length - 1) return;
-            count++;
-            // console.log(count);
-            // console.log(slider[count])
+        if (carousel.current) {
+            if (temp === 0) {
+                count.current = count.current + 1;
+            } else if (temp === -1) {
+                count.current = count.current - 1;
+            } else {
+                count.current = temp;
+            }
+
+            if (count.current > slider.length - 1) {
+                count.current--;
+                return;
+            }
+            if (count.current < 0) {
+                count.current++;
+                return;
+            }
+
+            carousel.current.style.transform = `translateX(${-slider[0].clientWidth * count.current}px)`;
             carousel.current.style.transition = `all 0.7s ease-in-out`;
             carousel.current.addEventListener('transitionend', () => {
-                if (slider[count].id === 'firstClone') {
+                if (slider[count.current].id === 'firstClone') {
+                    count.current = 1;
+                    carousel.current.style.transform = `translateX(${-slider[0].clientWidth * count.current}px)`;
                     carousel.current.style.transition = 'none';
-                    // console.log('ok');
-                    // console.log(count)
-                    count = slider.length - count;
-                    carousel.current.style.transform = `translateX(${-slider[0].clientWidth * count}px)`;
-                    for (let i = 0; i < dotsE.length; i++) {
-                        if (i === count - 1) {
-                            dotsE[i].classList.add('active');
-                        }
-                        else dotsE[i].classList.remove('active');
-                    }
-                    return;
+                    dotsE[count.current - 1].classList.add('active');
                 }
-            })
-        } else if (temp === -1) {
-            if (count <= 0) return;
-            count--;
-            carousel.current.style.transition = `all 0.7s ease-in-out`;
-            carousel.current.addEventListener('transitionend', () => {
-                if (slider[count].id === 'lastClone') {
+
+                if (slider[count.current].id === 'lastClone') {
+                    count.current = slider.length - 2;
+                    carousel.current.style.transform = `translateX(${-slider[0].clientWidth * count.current}px)`;
                     carousel.current.style.transition = 'none';
-                    count = slider.length - 2;
-                    carousel.current.style.transform = `translateX(${-slider[0].clientWidth * count}px)`;
-                    for (let i = 0; i < dotsE.length; i++) {
-                        if (i === count - 1) {
-                            dotsE[i].classList.add('active');
-                        }
-                        else dotsE[i].classList.remove('active');
-                    }
-                    return;
+                    dotsE[count.current - 1].classList.add('active');
                 }
+
             })
-
-        } else {
-            count = temp;
-            carousel.current.style.transition = `all 0.7s ease-in-out`;
-            carousel.current.style.transform = `translateX(${-slider[0].clientWidth * count}px)`;
-        }
-
-        // console.log(count)
-        if (count >= 0 && count < slider.length) {
-            carousel.current.style.transform = `translateX(${-slider[0].clientWidth * count}px)`;
         }
         for (let i = 0; i < dotsE.length; i++) {
-            if (i === count - 1) {
+            if (i === count.current - 1) {
                 dotsE[i].classList.add('active');
             }
             else dotsE[i].classList.remove('active');
         }
+        time.current = setTimeout(() => {
+            handleOnClick(0);
+        }, 4000)
     }
 
     const showCarousels = () => {
 
         if (carousels.length > 0) {
             let result = carousels.map((item, index) => {
-                return <li className="products-type carousel-item" key={index + 1} style={{ width: `${(1 / (carousels.length + 2)) * 100}%` }} >
+                return <li className="products-type carousel-item" key={index + 1} style={{ width: `${wrapSlide.clientWidth}px` }} >
                     <div className="products-type carousel-item-wrap">
                         <a className="products-type carousel-item-inner" href="/">
-                            <div className="products-type carousel-item-link" style={{ backgroundImage: `url(${item})` }}></div>
+                            {/* <div className="products-type carousel-item-link" style={{ backgroundImage: `url(${item})` }}></div> */}
+                            <img className="products-type carousel-item-link" src={item} alt="img" />
                         </a>
                     </div>
                 </li>
@@ -133,10 +153,11 @@ function ProductList({ type }) {
 
             result.unshift(carousels.map((item, index) => {
                 if (index === carousels.length - 1) {
-                    return <li className="products-type carousel-item" id="lastClone" key={0} style={{ width: `${(1 / (carousels.length + 2)) * 100}%` }} >
+                    return <li className="products-type carousel-item" id="lastClone" key={0} style={{ width: `${wrapSlide.clientWidth}px` }} >
                         <div className="products-type carousel-item-wrap">
                             <a className="products-type carousel-item-inner" href="/">
-                                <div className="products-type carousel-item-link" style={{ backgroundImage: `url(${item})` }}></div>
+                                <img className="products-type carousel-item-link" src={item} alt="img" />
+                                {/* <div className="products-type carousel-item-link" style={{ backgroundImage: `url(${item})` }}></div> */}
                             </a>
                         </div>
                     </li>
@@ -145,10 +166,11 @@ function ProductList({ type }) {
 
             result.push(carousels.map((item, index) => {
                 if (index === 0) {
-                    return <li className="products-type carousel-item" id="firstClone" key={carousels.length + 1} style={{ width: `${(1 / (carousels.length + 2)) * 100}%` }} >
+                    return <li className="products-type carousel-item" id="firstClone" key={carousels.length + 1} style={{ width: `${wrapSlide.clientWidth}px` }} >
                         <div className="products-type carousel-item-wrap">
                             <a className="products-type carousel-item-inner" href="/">
-                                <div className="products-type carousel-item-link" style={{ backgroundImage: `url(${item})` }}></div>
+                                <img className="products-type carousel-item-link" src={item} alt="img" />
+                                {/* <div className="products-type carousel-item-link" style={{ backgroundImage: `url(${item})` }}></div> */}
                             </a>
                         </div>
                     </li>
