@@ -9,7 +9,7 @@ const userApi = {
         const url = `/users/${id}`;
         return axiosClient.get(url);
     },
-    postUser: (data) => {
+    patchUser: (data) => {
         const url = `/users`;
         return axiosClient.post(url, data);
     }

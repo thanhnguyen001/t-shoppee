@@ -1,3 +1,7 @@
 .App {
     position: relative;
+    /* overflow: hidden; */
+}
+@media (max-width: 600px) {
+
 }

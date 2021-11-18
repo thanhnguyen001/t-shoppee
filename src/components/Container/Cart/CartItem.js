@@ -28,7 +28,7 @@ function CartItem(props) {
     const [quantityPrice, setQuantityPrice] = useState(product.quantity * product.new_price);
     const [quantity, setQuantity] = useState(product.quantity);
     const [temp, setTemp] = useState(1);
-    const [isChecked, setIsChecked] = useState(product.isChecked)
+    const [isChecked, setIsChecked] = useState(false);
     // console.log(product.isChecked);
 
     useEffect(() => {
@@ -36,7 +36,7 @@ function CartItem(props) {
     }, [product.isChecked])
 
     const patchAPI = (number, type) => {
-        console.log(user)
+        // console.log(user)
         if (user) {
             cart.forEach((item) => {
                 if (item.id === product.id && item.type === type) {

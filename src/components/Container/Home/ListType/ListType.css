@@ -131,7 +131,7 @@
 }
 @media (max-width: 1024px) {
   .list-type .types .types-detail {
-    overflow-x: auto;
+    overflow: auto hidden;
   }
   .types-btn-next, .types-btn-prev {
     display: none;

@@ -72,17 +72,20 @@ function SignForm({ match }) {
                         const user = {
                             user: {
                                 ...res,
-                                password: ''
+                                password: '',
+                                cart: []
                             }
                         }
                         dispatch(userSignIn(user));
+                    })
+                    .then(() => {
+                        location.href = '/shop';
                     })
                 // console.log(data);
                 setFail('')
             }
 
             // eslint-disable-next-line no-restricted-globals
-            location.href = '/shop';
         }
 
         else if (text === 'Đăng Nhập') {

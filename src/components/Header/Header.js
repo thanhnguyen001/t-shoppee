@@ -1,17 +1,21 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Header.css';
 import firebase from 'firebase';
 import { userLogOut } from '../../actions/actions';
+import useClickOutSide from '../../hooks/useClickOutside';
 
 function Header(props) {
 
     const { data } = props;
 
     const dispatch = useDispatch();
+    const listSearchRef = useRef();
+    useClickOutSide(listSearchRef)
+    const history = useHistory()
     // console.log(data)
     // const initialCart = JSON.parse(localStorage.getItem('CART'));
     // console.log(initialCart);
@@ -41,24 +45,19 @@ function Header(props) {
         firebase.auth().signOut().then(() => {
             console.log('user logged out')
         })
-        location.href = '/shop';
+        history.push('/shop');
 
         dispatch(userLogOut());
         setIsSignedIn(false);
     }
 
     const handleChangePage = (e) => {
-        console.log(e.target)
+        // console.log(e.target)
         const targetElement = e.target;
-        const check = targetElement.closest('.header__cart-item');
-        if (check) {
-            location.href = '/product'
-        }
         const cartPageElement = targetElement.closest('.header__cart-wrap');
         if (cartPageElement) {
             location.href = '/cart';
         }
-
     }
     const handleHoverAnimate = () => {
         const modalCart = document.querySelector('.header__cart-list');
@@ -91,7 +90,6 @@ function Header(props) {
 
     const showCartItem = (cart) => {
         if (cart) {
-
             return cart.map((item, index) => {
                 return <li className="header__cart-item" key={index}>
                     <img src={item.img} alt="" className="header__cart-item-img" />
@@ -113,12 +111,24 @@ function Header(props) {
         if (e.keyCode === 13) {
             console.log(e.target.value);
             localStorage.setItem('SEARCH_VALUE', e.target.value);
-            location.href = '/shop/Thời-Trang-Nam';
+            history.push('/shop/Thời-Trang-Nam');
         }
     }
     const handleSearch = (e) => {
         const value = e.target.value;
         setSearchValue(value);
+    }
+
+    const handleShowSearchList = (e) => {
+        const list = document.querySelector(".header-with-search-history");
+        if (list) {
+            if (e.target.className.includes("fas fa-arrow-left")) {
+                list.classList.remove("active");
+                return;
+            }
+            if (list.className.includes("active")) return;
+            list.classList.add("active");
+        }
     }
 
     return (
@@ -215,7 +225,7 @@ function Header(props) {
                                 </div>
                             </div>
                         </li>}
-                     
+
                         <li className="navbar__list--item navbar--hover-text">
                             <i className="navbar__list--item-icon far fa-question-circle"></i>
                             <a className="nav--item--text" href="">Trợ giúp</a>
@@ -277,13 +287,18 @@ function Header(props) {
 
                     <div className="header-with-search ">
                         <div className="header-search-bigbox">
-                            <input type="text" placeholder="Tìm kiếm trong trang này" 
-                                className="header-search-box" 
+                            <input type="text" placeholder="Tìm kiếm trong trang này"
+                                className="header-search-box"
                                 onKeyUp={handleKeyUp}
                                 value={searchValue}
                                 onChange={handleSearch}
+                                onFocus={handleShowSearchList}
                             />
-                            <ul className="header-with-search-history">
+                            <ul className="header-with-search-history" ref={listSearchRef}>
+                                <div className="input-inner-wrap">
+                                    <i className="fas fa-arrow-left" onClick={handleShowSearchList}></i>
+                                    <input type="text" placeholder="Tìm kiếm" className="input-inner" />
+                                </div>
                                 <h3 className=" header-with-search-heading">Lịch sử tìm kiếm</h3>
                                 <li className="header-with-search-history-item">
                                     <a href="">Kem dưỡng da</a>
@@ -292,10 +307,10 @@ function Header(props) {
                                     <a href="">Quần jean</a>
                                 </li>
                                 <li className="header-with-search-history-item">
-                                    <a href="">Quần jean</a>
+                                    <a href="">Áo khoác</a>
                                 </li>
                                 <li className="header-with-search-history-item">
-                                    <a href="">Quần jean</a>
+                                    <a href="">Laptop</a>
                                 </li>
                             </ul>
                         </div>
@@ -307,11 +322,10 @@ function Header(props) {
 
                     </div>
 
-                    {userToken && <div className={`header__cart ${data === 'cart-page' ? 'hide' : ''}`}>
+                    {userToken && <div className={`header__cart ${data === 'cart-page' ? 'hide' : ''}`} onClick={handleChangePage}>
                         <div className="header__cart-wrap"
                             onMouseEnter={handleHoverAnimate}
                             onMouseLeave={handleHoverOutAnimate}
-                            onClick={handleChangePage}
                         >
                             <i className="header__cart-icon fas fa-shopping-cart"></i>
                             <span className={`header_cart-numbers-carts ${cart && cart.length > 0 ? 'show' : 'hide'}`}>{cart ? cart.length : ''}</span>
@@ -319,7 +333,7 @@ function Header(props) {
                             {/* No cart: header__cart-no-cart 
                             Have cart: header__cart-has-carts  */}
 
-                            <div className={`header__cart-list ${cart && cart.length > 0 ? 'header__cart-has-carts' : 'header__cart-has-carts'}`}>
+                            <div className={`header__cart-list ${(cart && cart.length > 0) ? 'header__cart-has-carts' : 'header__cart-no-cart'}`}>
                                 <div className="no-cart-wrap">
                                     <img className="header__cart-no-cart-img" src="./assets/img/no-cart.png" alt="" />
                                     <span className="header__cart-no-cart-msg">Chưa có sản phẩm</span>
@@ -332,7 +346,11 @@ function Header(props) {
                                         {showCartItem(cart)}
 
                                     </ul>
-                                    <div href="" className="header__cart-list-items-btn btn btn--primary">Xem giỏ hàng</div>
+                                    <div href=""
+                                        onClick={handleChangePage}
+                                        className="header__cart-list-items-btn btn btn--primary">
+                                        Xem giỏ hàng
+                                    </div>
                                 </div>
                             </div>
 

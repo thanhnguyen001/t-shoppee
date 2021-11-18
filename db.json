@@ -105,6 +105,27 @@
       "numberPhone": "123456780",
       "email": "test1@gmail.com",
       "id": 4
+    },
+    {
+      "username": "megazord009",
+      "password": "150398ssc",
+      "numberPhone": "012346782",
+      "email": "test10@gmail.com",
+      "id": 5
+    },
+    {
+      "username": "megazord0090",
+      "password": "10398ssc",
+      "numberPhone": "0123456780",
+      "email": "adadas@gmail.com",
+      "id": 6
+    },
+    {
+      "username": "megazord009df",
+      "password": "150398ssc",
+      "numberPhone": "0123456783",
+      "email": "dadas@gmail.com",
+      "id": 7
     }
   ],
   "ThoiTrangNam": [

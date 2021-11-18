@@ -20,7 +20,6 @@ function Cart() {
 
 
     useEffect(() => {
-        
         if (productList) {
             setProductList(cart);
             let checked = true;
@@ -40,10 +39,16 @@ function Cart() {
             // console.log('ok');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [productList,cart]);
+    }, [productList, cart]);
 
-    const handleCheckedAll = (e) => {
+    const handleCheckedAll = (e, stt) => {
         const productElements = document.querySelectorAll('input[type=checkbox]');
+        if (!e && stt) {
+            productElements[1].checked = false;
+            productElements[productElements.length - 1].checked = false;
+        }
+
+        if (!e) return;
         let temp = e.target.checked;
         const newProducts = [...productList];
         newProducts.forEach(product => {
@@ -84,9 +89,13 @@ function Cart() {
     const onCheckedCart = (change) => {
         if (change.action === 'isChecked') {
             const newProducts = [...productList];
+            if (!change.isChecked) {
+                handleCheckedAll(null, true)
+            }
             newProducts.forEach((product) => {
                 if (product.id === change.id && product.type === change.type) {
-                    product.isChecked = change.isChecked
+                    product.isChecked = change.isChecked;
+
                 };
             })
             setProductList(newProducts);

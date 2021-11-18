@@ -1,4 +1,4 @@
-const initialState = JSON.parse(localStorage.getItem('USER_INFO')) || '';
+const initialState = JSON.parse(localStorage.getItem('USER_INFO')) || null;
 
 const isSignedIn = (state = initialState, action) => {
     switch (action.type) {
