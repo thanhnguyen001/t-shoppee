@@ -23,6 +23,7 @@
   position: relative;
   cursor: pointer;
   overflow: hidden;
+  width: 100%;
 }
 
 .banner-carousel .carousel-wrap:hover .carousel-next, .banner-carousel .carousel-wrap:hover .carousel-prev {
@@ -89,14 +90,15 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 700%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
 
 .banner-carousel .carousel-item {
-  width: 14.29%;
+  width: 100%;
   height: 100%;
+  flex-shrink: 0;
 }
 
 .banner-carousel .carousel-item-link {
@@ -147,6 +149,9 @@
   }
   .banner-carousel {
     width: 100%;
+  }
+  .banner, .banner-carousel .carousel-item-link {
+    height: 180px;
   }
 }
 /*# sourceMappingURL=Banner.css.map */

@@ -397,4 +397,68 @@ input[type="checkbox"] {
   font-weight: 500;
   margin-bottom: 12px;
 }
+.cart-product--mobile {
+  display: flex;
+  flex-direction: column;
+}
+input[type="checkbox"] {
+  min-width: 2rem;
+}
+
+@media (max-width: 580px) {
+  .hide-mobile,
+  .cart-product-price,
+  .cart-table--heading,
+  .cart-total--cost-pay-discount,
+  .cart-total--cost-pay-must,
+  .cart-toal--cost-delete {
+    display: none;
+  }
+  .cart-total--cost-pay-must.show-mobile {
+    display: block;
+  }
+  .cart-product--img {
+    display: flex;
+  }
+  .cart-product-name {
+    width: 90%;
+  }
+  .cart-product--title,
+  .cart-product-unit {
+    width: 100%;
+    margin-left: 1.2rem;
+    text-align: start;
+  }
+  .cart-product--title-inner {
+    -webkit-line-clamp: 1;
+    line-height: 20px;
+  }
+  .cart-product-quantity {
+    width: 100%;
+    margin: 4px 0;
+  }
+  .cart-total--cost-part:nth-child(1) {
+    width: 31%;
+  }
+  .cart-total--cost-part:nth-child(2) {
+    width: 69%;
+  }
+  .cart-total--cost-buy {
+    width: 20px;
+  }
+  .cart-total--cost-buy button {
+    min-width: 20px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+  .cart-total--cost-pay-must span {
+    font-size: 1.6rem;
+  }
+  .cart-total--shop-voucher {
+    justify-content: start;
+  }
+  .cart-total--voucher-wrap {
+    width: 100%;
+  }
+}
 /*# sourceMappingURL=Cart.css.map */

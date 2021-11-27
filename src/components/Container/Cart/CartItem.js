@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNumToCart, deleteCartItem } from '../../../actions/actions';
 import userApi from '../../../api/usersApi';
+import useDimensionWindow from '../../../hooks/useDimensionWindow';
 
 CartItem.propTypes = {
     updateCart: PropTypes.func.isRequired
@@ -24,6 +25,7 @@ function CartItem(props) {
     const cart = useSelector(state => state.cart);
     // console.log(cart.cart);
     const dispatch = useDispatch();
+    const { width: windowWidth } = useDimensionWindow();
 
     const [quantityPrice, setQuantityPrice] = useState(product.quantity * product.new_price);
     const [quantity, setQuantity] = useState(product.quantity);
@@ -72,7 +74,7 @@ function CartItem(props) {
         console.log(cart);
         userApi.patchUser(user.id, data);
         dispatch(deleteCartItem({
-            id: product.id, 
+            id: product.id,
             type: product.type
         }));
     }
@@ -144,32 +146,70 @@ function CartItem(props) {
                             checked={isChecked}
                             onChange={handleClickChecked}
                         />
+
                         <div className="cart-product--img">
                             <a href='' >
                                 <div className="cart-product--img-inner"
                                     style={{ backgroundImage: `url(${product.img})` }}>
                                 </div>
                             </a>
+
+                            {windowWidth <= 580 &&
+                                <div className="cart-product--mobile">
+                                    <div className="cart-product--title">
+                                        <a href='' className="cart-product--title-inner">
+                                            {product.name}
+                                        </a>
+                                    </div>
+                                    <div className="cart-product--distribute">
+                                        <div className="cart-product--distribute-inner">
+                                            <span>Phân Loại Hàng</span>
+                                            <i className="fas fa-caret-down"></i>
+                                        </div>
+                                    </div>
+                                    <div className="cart-table--item-unit cart-product-unit">
+                                        <div className="cart-product--unit-wrap">
+                                            <span className="cart-unit-old">₫{product.old_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</span>
+                                            <span className="cart-unit-new">₫{product.new_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</span>
+                                        </div>
+                                    </div>
+                                    <div className="cart-table--item-quantity cart-product-quantity">
+                                        <div className="cart-product--quantity-wrap">
+                                            <div className="cart-decrease" onClick={() => handleQuantity(-1)}>-</div>
+                                            <div className="cart-quantity">
+                                                <input type="text" value={quantity} className="input-quantity" onChange={handleEnterQuantity} onBlur={handleBlurQuantity} />
+                                            </div>
+                                            <div className="cart-increase" onClick={() => handleQuantity(1)}>+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
                         </div>
-                        <div className="cart-product--title">
+
+                        {windowWidth > 580 && <div className="cart-product--title">
                             <a href='' className="cart-product--title-inner">
                                 {product.name}
                             </a>
-                        </div>
-                        <div className="cart-product--distribute">
+                        </div>}
+
+                        {windowWidth > 580 && <div className="cart-product--distribute">
                             <div className="cart-product--distribute-inner">
                                 <span>Phân Loại Hàng</span>
                                 <i className="fas fa-caret-down"></i>
                             </div>
-                        </div>
+                        </div>}
+
                     </div>
-                    <div className="cart-table--item-unit cart-product-unit">
+
+                    {windowWidth > 580 && <div className="cart-table--item-unit cart-product-unit">
                         <div className="cart-product--unit-wrap">
                             <span className="cart-unit-old">₫{product.old_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</span>
                             <span className="cart-unit-new">₫{product.new_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</span>
                         </div>
-                    </div>
-                    <div className="cart-table--item-quantity cart-product-quantity">
+                    </div>}
+
+                    {windowWidth > 580 && <div className="cart-table--item-quantity cart-product-quantity">
                         <div className="cart-product--quantity-wrap">
                             <div className="cart-decrease" onClick={() => handleQuantity(-1)}>-</div>
                             <div className="cart-quantity">
@@ -177,7 +217,8 @@ function CartItem(props) {
                             </div>
                             <div className="cart-increase" onClick={() => handleQuantity(1)}>+</div>
                         </div>
-                    </div>
+                    </div>}
+
                     <div className="cart-table--item-price cart-product-price">
                         <div className="cart-product--price-wrap">
                             <span>₫{
@@ -185,11 +226,13 @@ function CartItem(props) {
                             }</span>
                         </div>
                     </div>
+
                     <div className="cart-table--item-adjust cart-product-adjust">
-                        <div className="cart-product--adjust-wrap" onClick={ handleDeleteCart } >
+                        <div className="cart-product--adjust-wrap" onClick={handleDeleteCart} >
                             <span>Xóa</span>
                         </div>
                     </div>
+
                 </div>
                 <div className="cart-table--item-voucher">
                     <div className="cart-product--voucher-wrap">

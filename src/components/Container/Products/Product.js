@@ -5,13 +5,14 @@ import { Link, withRouter } from 'react-router-dom';
 import { addToCart } from '../../../actions/actions';
 import axiosClient from '../../../api/callApi';
 import userApi from '../../../api/usersApi';
+import Province from '../Province';
 // import productApi from '../../../api/productApi';
 import DetailProduct from './DetailProduct';
 import './Product.css';
 
 function Product({ match }) {
 
-    const userToken = useSelector(state => state.user.user);
+    const userToken = useSelector(state => state.user)?.user;
     // const [user, setUser] = useState({});
     // console.log(userToken);
     // console.log(match);
@@ -33,6 +34,7 @@ function Product({ match }) {
         "info": ""
 
     });
+
     const [temp, setTemp] = useState(1);
 
     const [slideWidth, setSlideWidth] = useState(null);
@@ -168,7 +170,7 @@ function Product({ match }) {
         });
     }
 
-    const handleBuyProduct = async (status) => {
+    const handleAddProductToCart = async (status) => {
         const cart = await JSON.parse(localStorage.getItem('CART'));
         if (cart) {
             let isExist = false;
@@ -224,9 +226,17 @@ function Product({ match }) {
 
     const handleHideModal = () => {
         const modalAddToCartE = document.querySelector('.product-buyer--modal');
-            if (modalAddToCartE) {
-                modalAddToCartE.classList.remove('show');
-            }
+        if (modalAddToCartE) {
+            modalAddToCartE.classList.remove('show');
+        }
+    }
+
+    const handleUpdateAddress = (address) => {
+        const span = document.querySelector(".modal-express--location span");
+        if (span) {
+            span.textContent = address;
+            handleActiveModal();
+        }
     }
 
 
@@ -241,6 +251,7 @@ function Product({ match }) {
             </div>
         })
     }
+
 
     return (
         <div className="product-buyer">
@@ -375,7 +386,7 @@ function Product({ match }) {
                                                             Vận Chuyển Tới
                                                         </span>
                                                         <span className="express--location-line2 modal-express--location" onClick={handleActiveModal}>
-                                                            Huyện Ba Vì
+                                                            <span>Huyện Ba Vì</span>
                                                             <i className="fas fa-chevron-down"></i>
                                                             <i className="fas fa-chevron-up hide"></i>
                                                         </span>
@@ -385,7 +396,7 @@ function Product({ match }) {
                                                             Phí Vận Chuyển
                                                         </span>
                                                         <span className="express--location-line2">
-                                                            ₫21.000
+                                                            <span><span className="fee-mobile">Phí vận chuyển: </span> ₫21.000</span>
                                                             <i className="fas fa-chevron-down"></i>
                                                         </span>
                                                     </div>
@@ -411,17 +422,17 @@ function Product({ match }) {
                                         </div>
                                         <div className="product-quantity--available">
                                             <span className="product-quantity--available-text">
-                                             {maxQuantity} {`${quantity === maxQuantity ? 'số lượng đã đạt tối đa' : 'sản phẩm có sẵn'}`}
+                                                {maxQuantity} {`${quantity === maxQuantity ? 'số lượng đã đạt tối đa' : 'sản phẩm có sẵn'}`}
                                             </span>
                                         </div>
                                     </div>
                                     <div className="product-quantity--cart">
-                                        <div className="product-quantity--add-to-cart" onClick={() => handleBuyProduct(false)}>
+                                        <div className="product-quantity--add-to-cart" onClick={() => handleAddProductToCart(false)}>
                                             <i className="fas fa-cart-plus"></i>
                                             <span className="product-quantity--text-add">Thêm Vào Giỏ Hàng</span>
                                         </div>
                                         <div className="product-quantity--buy-now" >
-                                            <Link to={!!userToken ? '/cart' : '/sign-in'} onClick={() => handleBuyProduct(true)}>
+                                            <Link to={!!userToken ? '/cart' : '/sign-in'} onClick={() => handleAddProductToCart(true)}>
                                                 <span className="product-quantity--text-buy">Mua Ngay</span>
                                             </Link>
                                         </div>
@@ -448,35 +459,7 @@ function Product({ match }) {
 
                             <div className="express--location-list-province modal">
                                 <div className="express--location-list-province-wrap">
-                                    <ul className="list-province">
-                                        <li className="province-item">Hà Nội</li>
-                                        <li className="province-item">1</li>
-                                        <li className="province-item">2</li>
-                                        <li className="province-item">3</li>
-                                        <li className="province-item">4</li>
-                                        <li className="province-item">5</li>
-                                        <li className="province-item">6</li>
-                                        <li className="province-item">7</li>
-                                        <li className="province-item">8</li>
-                                        <li className="province-item">9</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-                                        <li className="province-item">10</li>
-
-                                    </ul>
+                                    <Province onUpdateAddress={handleUpdateAddress} />
                                 </div>
                             </div>
 

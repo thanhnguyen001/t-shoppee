@@ -199,7 +199,8 @@ function Cart() {
                                 <div className="cart-total--cost-part">
                                     <input type="checkbox" className="cart-total--cost-all" onClick={handleCheckedAll} ></input>
                                     <div className="cart-total--cost-all-text">
-                                        <span style={{ cursor: 'pointer' }}>Chọn Tất Cả (1)</span>
+                                        <span className="hide-mobile" style={{ cursor: 'pointer' }}>Chọn Tất Cả ({totalProduct})</span>
+                                        <span className="show-mobile" style={{ cursor: 'pointer' }}>Tất Cả ({totalProduct})</span>
                                     </div>
                                     <div className="cart-toal--cost-delete" style={{ cursor: 'pointer' }}>
                                         <span>Xóa</span>
@@ -212,6 +213,13 @@ function Cart() {
                                                 ₫{totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                                             </span>
                                         </div>
+
+                                        <div className="cart-total--cost-pay-must show-mobile">Tổng tiền:
+                                            <span>
+                                                ₫{totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                            </span>
+                                        </div>
+
                                         <div className="cart-total--cost-pay-discount">
                                             <span>Tiết Kiệm: ₫71k</span>
                                         </div>

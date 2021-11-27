@@ -2,6 +2,16 @@
     position: relative;
     /* overflow: hidden; */
 }
-@media (max-width: 600px) {
+.no-padding {
+    padding: 0 !important;
+}
+.home-product {
+    padding-left: 10px;
+}
 
+
+@media (max-width: 600px) {
+    .sale-now {
+        display: none;
+    }
 }

@@ -124,6 +124,7 @@
     display: inline-block;
     max-width: 320px;
     overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -455,6 +456,11 @@
 
 .list-province li {
   margin-left: 4px;
+  padding: 4px 0;
+  cursor: pointer;
+}
+.list-province li:hover {
+  background-color: #9fb19f;
 }
 
 .fas.fa-truck {
@@ -916,14 +922,52 @@
   font-size: 1.8rem;
   text-align: center;
 }
+.fee-mobile {
+  visibility: hidden;
+}
+@media (max-width: 580px) {
+  .product-standard--wrap {
+    font-size: 1.2rem;
+    transform: translateX(10px);
+  }
+}
 
-@media (max-width: 375px) {
+@media (max-width: 580px) {
+  .path-to-product {
+    max-width: 280px;
+  }
+  .product-express--title,
+  .express--location-line1,
+  .product-quantity--text,
+  .product-standard,
+  .product-introduce--star-filter {
+    display: none;
+  }
+  .fee-mobile {
+    visibility: visible;
+  }
+  .product-express,
+  .product-quantity {
+    padding: 15px 0;
+  }
+  .product-express--wrap,
+  .product-quantity--wrap {
+    padding: 15px 0;
+  }
+
+  .express--location-list-province {
+    height: 200px;
+    width: 170px;
+  }
   .product-img {
     padding: 15px 2vw;
     width: 100%;
   }
-  .product-img .product-img--child {
+
+  .product-img .product-img--child,
+  .product-introduce--star-total {
     margin: 0;
+    width: 100%;
   }
   .product-img .product-img--child-wrap {
     width: 100%;
@@ -940,7 +984,36 @@
   .product-img .product-img--child-ntn img {
     width: 100%;
   }
-  .product-img .product-img--child-right, .product-img .product-img--child-left {
+  .product-img .product-img--child-right,
+  .product-img .product-img--child-left {
     display: none;
+  }
+  .product-introduce--detail-title {
+    padding: 20px 0 20px 0;
+  }
+  .product-introduce--description-wrap,
+  .product-introduce--star-wrap {
+    padding: 0;
+  }
+  .product-introduce--detail,
+  .product-introduce--description-title {
+    padding: 0 12px;
+  }
+  .product-introduce--description-inner {
+    padding: 0 12px;
+    height: 260px;
+    overflow: hidden scroll;
+  }
+  .product-introduce--star-total {
+    flex-direction: row-reverse;
+    font-size: 1.6rem;
+    justify-content: flex-end;
+    margin-left: 12px;
+  }
+  .product-introduce--star-total-line1 {
+    margin-left: 8px;
+  }
+  .product-introduce--star-total-line1 span {
+    font-size: 1.8rem;
   }
 }

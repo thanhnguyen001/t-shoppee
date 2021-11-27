@@ -1,7 +1,7 @@
 .shortcut-btn {
     position: fixed;
-    bottom: 140px;
-    right: 24px;
+    bottom: 12px;
+    right: 12px;
     z-index: 1000;
     display: none;
 }

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './ShortcutBtn.css';
 
 function ShortcutBtn() {
 
     const user = useSelector(state => state.user)?.user.user;
+    const location = useLocation();
 
     const handleActiveShortcut = () => {
         const shortcutWrapElement = document.querySelector('.shortcut-btn--wrap');
@@ -16,6 +17,14 @@ function ShortcutBtn() {
         window.scrollTo(0, 0);
         handleActiveShortcut();
     }
+
+    useEffect(() => {
+        if (location.pathname === "/cart") {
+            const shortcut = document.querySelector(".shortcut-btn");
+            if (!shortcut) return;
+            shortcut.style.transform = "translateY(-100px)"
+        }
+    }, [location.pathname])
 
     return (
         <div className="shortcut-btn">

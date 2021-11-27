@@ -7,7 +7,9 @@ import Category from '../Category/Category';
 const Products = React.lazy(() => import('./Products'));
 
 function ProductList({ type }) {
-    let count = useRef(1);
+    const count = useRef(1);
+    const moveX = useRef(0);
+
     // console.log(type)
     const carousel = useRef(null);
     const wrapSlide = useRef(null);
@@ -28,6 +30,15 @@ function ProductList({ type }) {
                     type = "Thời-Trang-Nam";
                 }
                 setCarousels(response[type]);
+                const wrapCarousel = document.querySelector(".carousel-wrap");
+                const carouselSlide = document.querySelector(".carousel-slide");
+        
+                if (carouselSlide && wrapCarousel) {
+                    // console.log(wrapCarousel.clientWidth);
+                    carouselSlide.style.transform = `translateX(${-wrapCarousel.clientWidth * count.current}px)`;
+                    carouselSlide.style.transition = `all 0.7s ease-in-out`;
+                    moveX.current = wrapCarousel.clientWidth * count.current;
+                }
 
             } catch (error) {
                 console.log(error);
@@ -38,29 +49,19 @@ function ProductList({ type }) {
     }, [type])
 
     // Load carousel item and add transition 
+
     useEffect(() => {
-        // const slideItemElements = document.querySelectorAll('.carousel-item');
-        // const dotsE = document.querySelectorAll('.change-slide');
-        // setDots(dotsE);
-        // setSlider(slideItemElements);
-        if (carousel.current) {
-            // console.log([wrapSlide.current]);
-            if (wrapSlide.current) {
-                carousel.current.style.transform = `translateX(${-wrapSlide.current.clientWidth * count.current}px)`;
-            }
+        if (carousel.current && wrapSlide.current) {
+            // console.log(wrapSlide.current.clientWidth);
+            carousel.current.style.transform = `translateX(${-wrapSlide.current.clientWidth * count.current}px)`;
             carousel.current.style.transition = `all 0.7s ease-in-out`;
+            moveX.current = wrapSlide.current.clientWidth * count.current;
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [windowWidth])
 
-    const [isFirstChange, setFirst] = useState(true);
+    // const [isFirstChange, setFirst] = useState(true);
 
-    const time = useRef(setTimeout(() => {
-        if (isFirstChange) {
-            setFirst(false);
-            handleOnClick(1);
-        }
-    }, 4000));
+    const time = useRef(null);
 
     function resetAutoChange() {
         if (time.current) {
@@ -83,8 +84,10 @@ function ProductList({ type }) {
 
     const handleOnClick = async (temp) => {
         resetAutoChange();
-        setFirst(false);
-
+        // setFirst(false);
+        time.current = setTimeout(() => {
+            handleOnClick(0);
+        }, 4000)
         const dotsE = document.querySelectorAll('.change-slide');
         const slider = document.querySelectorAll('.carousel-item');
         // console.log(slider);
@@ -132,16 +135,14 @@ function ProductList({ type }) {
             }
             else dotsE[i].classList.remove('active');
         }
-        time.current = setTimeout(() => {
-            handleOnClick(0);
-        }, 4000)
+
     }
 
     const showCarousels = () => {
 
         if (carousels.length > 0) {
             let result = carousels.map((item, index) => {
-                return <li className="products-type carousel-item" key={index + 1} style={{ width: `${wrapSlide.clientWidth}px` }} >
+                return <li className="products-type carousel-item" key={index + 1} >
                     <div className="products-type carousel-item-wrap">
                         <a className="products-type carousel-item-inner" href="/">
                             {/* <div className="products-type carousel-item-link" style={{ backgroundImage: `url(${item})` }}></div> */}
@@ -153,7 +154,7 @@ function ProductList({ type }) {
 
             result.unshift(carousels.map((item, index) => {
                 if (index === carousels.length - 1) {
-                    return <li className="products-type carousel-item" id="lastClone" key={0} style={{ width: `${wrapSlide.clientWidth}px` }} >
+                    return <li className="products-type carousel-item" id="lastClone" key={0} >
                         <div className="products-type carousel-item-wrap">
                             <a className="products-type carousel-item-inner" href="/">
                                 <img className="products-type carousel-item-link" src={item} alt="img" />
@@ -166,7 +167,7 @@ function ProductList({ type }) {
 
             result.push(carousels.map((item, index) => {
                 if (index === 0) {
-                    return <li className="products-type carousel-item" id="firstClone" key={carousels.length + 1} style={{ width: `${wrapSlide.clientWidth}px` }} >
+                    return <li className="products-type carousel-item" id="firstClone" key={carousels.length + 1} >
                         <div className="products-type carousel-item-wrap">
                             <a className="products-type carousel-item-inner" href="/">
                                 <img className="products-type carousel-item-link" src={item} alt="img" />
@@ -192,6 +193,27 @@ function ProductList({ type }) {
         }
     }
 
+    // Handle Touch on mobile
+    const startPoint = useRef(0);
+    const space = useRef(0);
+    const prevSpace = useRef(0);
+    const direct = useRef("left");
+    const prevDirect = useRef("left");
+
+    const handleTouchStart = (e) => {
+        startPoint.current = e.touches[0].pageX;
+    }
+    const handleTouchesMove = (e) => {
+        if (windowWidth > 600) return;
+        space.current = e.touches[0].pageX - startPoint.current;
+        space.current >= prevSpace.current ? direct.current = "right" : direct.current = "left";
+        console.log(direct.current)
+        prevSpace.current = space.current;
+    }
+    const handleTouchEnd = () => {
+
+    }
+
     return (
         <div>
             <div className="row sm-gutter app__content">
@@ -199,16 +221,16 @@ function ProductList({ type }) {
                 <div className="products-type banner">
                     <div className="products-type banner-carousel">
                         <div className="products-type carousel-wrap" ref={wrapSlide}>
-                            <ul className='products-type carousel-slide' ref={carousel} style={{ width: `${(carousels.length + 2) * 100}%` }}>
-
+                            <ul className='products-type carousel-slide' ref={carousel}
+                                onTouchStart={handleTouchStart}
+                                onTouchMove={handleTouchesMove}
+                                onTouchEnd={handleTouchEnd}
+                            >
                                 {showCarousels(carousels)}
-
                             </ul>
 
                             <div className="products-type label-banner">
-
                                 {showDotSlide(carousels)}
-
                             </div>
 
                             <button className='carousel-next' onClick={() => handleOnClick(0)}>

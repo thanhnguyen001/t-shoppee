@@ -13,5 +13,5 @@ server.use(jsonServer.rewriter({
 const PORT = process.env.PORT || 1368;
 server.use(router)
 server.listen(PORT, () => {
-  console.log('JSON Server is running')
+  console.log('JSON Server is running in PORT: ', PORT)
 })
