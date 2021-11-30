@@ -18,7 +18,12 @@ function SignForm({ match }) {
     const [users, setUsers] = useState([]);
     const [fail, setFail] = useState(null);
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            username: "megazord1",
+            password: "123456789"
+        }
+    });
 
     useEffect(() => {
         const fetchUserList = async () => {
