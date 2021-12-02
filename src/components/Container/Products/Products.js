@@ -13,7 +13,6 @@ function Products({ data, type }) {
     const [productList, setProductList] = useState([]);
     // console.log(type);
     const [option, setOption] = useState('Giá');
-    const [isLoaded, serIsLoaded] = useState(false);
 
     // Fetch product type
     useEffect(() => {
