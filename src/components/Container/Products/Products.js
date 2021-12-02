@@ -12,7 +12,8 @@ function Products({ data, type }) {
 
     const [productList, setProductList] = useState([]);
     // console.log(type);
-    const [option, setOption ] = useState('Giá'); 
+    const [option, setOption] = useState('Giá');
+    const [isLoaded, serIsLoaded] = useState(false);
 
     // Fetch product type
     useEffect(() => {
@@ -37,7 +38,7 @@ function Products({ data, type }) {
         const newList = [...productList];
         // console.log(newList)
         if (choose) {
-            newList.sort((a,b) => {
+            newList.sort((a, b) => {
                 if (Number.parseInt(a.new_price) < Number.parseInt(b.new_price)) return 1;
                 if (Number.parseInt(a.new_price) > Number.parseInt(b.new_price)) return -1;
                 return 0;
@@ -45,7 +46,7 @@ function Products({ data, type }) {
             setOption('Giá: Cao đến Thấp');
         }
         else {
-            newList.sort((a,b) => {
+            newList.sort((a, b) => {
                 if (Number.parseInt(a.new_price) < Number.parseInt(b.new_price)) return -1;
                 if (Number.parseInt(a.new_price) > Number.parseInt(b.new_price)) return 1;
                 return 0;
@@ -122,10 +123,10 @@ function Products({ data, type }) {
                     <span className="filter-select-text">{option}</span>
                     <i className="filter-select-icon fas fa-chevron-down"></i>
                     <ul className="filter-select--option">
-                        <li className="filter-select--option-item" onClick={() =>  handleSort(false) }>
+                        <li className="filter-select--option-item" onClick={() => handleSort(false)}>
                             Giá: Thấp đến Cao
                         </li>
-                        <li className="filter-select--option-item"onClick={() =>  handleSort(true) }>
+                        <li className="filter-select--option-item" onClick={() => handleSort(true)}>
                             Giá: Cao đến Thấp
                         </li>
                     </ul>
@@ -168,7 +169,12 @@ function Products({ data, type }) {
             <div className="home-product">
                 <div className="row sm-gutter productList">
 
-                    {showProducts(productList)}
+                    {(!productList || productList.length <= 0) && <div className="loading">
+                        <div className="loading-wrap">
+                            <i className="fas fa-circle-notch"></i>
+                        </div>
+                    </div>}
+                    {productList && productList.length > 0 && showProducts(productList)}
 
                 </div>
             </div>

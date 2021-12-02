@@ -1,3 +1,29 @@
+.products-suggest-today {
+    width: 100%;
+}
+.loading {
+    width: 100%;
+    margin-top: 30px;
+}
+.loading-wrap {
+    font-size: 4rem;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    margin: auto;
+    color: red;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateZ(360deg);
+    }
+    to {
+        transform: rotateZ(0deg);
+    }
+}
+
 @media (min-width: 740px) and (max-width: 1023px) {
     .mobile-category.appear-on-tablet {
         display: block;
